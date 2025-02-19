@@ -4,6 +4,9 @@ import pathlib
 import sys
 from functools import partial as bind
 
+from env.dreamer_from_mjx import DreamerFromMJXEnv
+from env.mjx import MJXEnv
+
 folder = pathlib.Path(__file__).parent
 sys.path.insert(0, str(folder.parent))
 sys.path.insert(1, str(folder.parent.parent))
@@ -231,6 +234,7 @@ def make_env(config, index, **overrides):
       'bsuite': 'embodied.envs.bsuite:BSuite',
       'memmaze': lambda task, **kw: from_gym.FromGym(
           f'MemoryMaze-{task}-v0', **kw),
+      'mjx': lambda task, **kw: DreamerFromMJXEnv(MJXEnv(task), **kw),
   }[suite]
   if isinstance(ctor, str):
     module, cls = ctor.split(':')

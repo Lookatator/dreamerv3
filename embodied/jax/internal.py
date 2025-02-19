@@ -34,8 +34,8 @@ def setup(
   platform and jax.config.update('jax_platforms', platform)
   jax.config.update('jax_disable_most_optimizations', debug)
   jax.config.update('jax_disable_jit', not jit)
-  if transfer_guard and jit and not debug_nans:
-    jax.config.update('jax_transfer_guard', 'disallow')
+  # if transfer_guard and jit and not debug_nans:
+  #   jax.config.update('jax_transfer_guard', 'disallow')
   os.environ['XLA_PYTHON_CLIENT_PREALLOCATE'] = str(bool(prealloc)).lower()
   jax.config.update('jax_debug_nans', debug_nans)
   jax.config.update('jax_enable_compilation_cache', compilation_cache)
